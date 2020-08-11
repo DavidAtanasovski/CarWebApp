@@ -1,0 +1,117 @@
+﻿@page
+@model CarWebApp.Pages.Page.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+    <link href="~/css/DetailPicture.css" rel="stylesheet" type="text/css">
+
+<h1>Car Information for @Model.Car.ModelName</h1>
+
+<body>
+    @{
+        var photoPath = "~/Images/" + Model.Car.Photo;
+    }
+
+    <div style="margin-top:30px;">
+        <img src="@photoPath" asp-append-version="true" />
+
+    </div>
+
+  
+
+    <h1>
+        Overview
+    </h1>
+
+    <table style="width:100%; margin-top:30px;">
+        <tr>
+            <th>Product Label</th>
+            <td>@Model.Car.ProductLabel</td>
+        </tr>
+        <tr>
+            <th>Model Name</th>
+            <td>@Model.Car.ModelName</td>
+        </tr>
+        <tr>
+            <th>Seats</th>
+            <td>@Model.Car.Seats</td>
+        </tr>
+    </table>
+
+    <h1 style="margin-top:30px;">Performance</h1>
+
+    <table style="width:100%; margin-top:30px;">
+        <tr>
+            <th>Engine</th>
+            <th>Engine Label</th>
+            <td>@Model.Car.EngineLabel</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Max.Power(ps)</th>
+            <td>@Model.Car.MaxEngPower</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Max. Torque(kg*m)</th>
+            <td> @Model.Car.MaxTorqPower</td>
+        </tr>
+        <tr style="margin-top:30px;">
+            <th>Fuel Consumption</th>
+            <th>Fuel Type</th>
+            <td>@Model.Car.FuelType</td>
+        </tr>
+    </table>
+
+    <h1 style="margin-top:30px;">Dimension</h1>
+    <table style="width:100%; margin-top:30px;">
+        <tr>
+            <th>Exterior</th>
+            <th>Overall Length(mm)</th>
+            <td>@Model.Car.OverallLenght</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Overall Height(mm)</th>
+            <td>@Model.Car.OverallHeight</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Overall Width(mm)</th>
+            <td>@Model.Car.OverallWidth</td>
+        </tr>
+        <tr>
+            <th>Weight</th>
+            <th>Lightest Curb Weight(kg)</th>
+            <td>@Model.Car.LightestCurbWeight</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Heaviest Curb Weight(kg)</th>
+            <td>@Model.Car.HeaviestCurbWeight</td>
+        </tr>
+
+    </table>
+
+    <h1 style="margin-top:30px;">Wheels</h1>
+
+    <table style="width:100%; margin-top:30px;">
+        <tr>
+            <th>Wheels & Tires</th>
+            <th>Wheels</th>
+            <td>@Model.Car.Wheels</td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Tires</th>
+            <td>@Model.Car.Tires</td>
+        </tr>
+    </table>
+
+
+
+
+
+        <a style="margin-top:30px;" asp-page="./CarModels" class="btn btn-primary">All Cars</a>
+</body>

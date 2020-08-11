@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SigninManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CarWebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/solid.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav style="background-color:#808080;" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  box-shadow mb-3">
+            <div class="container">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <img style="width:35px; height:auto;" src="~/Images/email (1).png" />
+
+                        </li>
+                        <li class="nav-item">
+                            <p style="font-size:13px; margin-top:7px; margin-left:5px;">davidatanasov@yahoo.com</p>
+                        </li>
+                        <li class="nav-item">
+                            <img style="width:45px; margin-top:5px; margin-left:10px; height:auto;" src="~/Images/telephone (1).png" />
+                        </li>
+                        <li class="nav-item">
+                            <p style="font-size:13px; margin-top:7px; margin-left:-15px;"> +304 4428 5338</p>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+
+                            <img style="width:50px; height:auto; margin-left:-50%;" src="~/Images/hundai.png" />
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav flex-grow-1" style="font-weight:bold;">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Page/CarModels">Models</a>
+                        </li>
+
+                        @if (SigninManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link font-weight-bold text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Adminitration
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a  class="font-weight-bold text-dark dropdown-item" asp-area="" asp-controller="AdminUser">Manage Users</a>
+                                    <a  class="font-weight-bold text-dark dropdown-item" asp-area="" asp-controller="AdminRole">Manage Roles</a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

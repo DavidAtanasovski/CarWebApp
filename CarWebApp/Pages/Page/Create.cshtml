@@ -1,0 +1,147 @@
+﻿@page "{carID:int?}"
+@model CarWebApp.Pages.Page.CreateModel
+@{
+    Layout = null;
+}
+
+
+<h1>Create a car</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Car.Id" />
+    <input type="hidden" asp-for="Car.Photo" />
+
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.ProductLabel"></label>
+            <input class="form-control" asp-for="Car.ProductLabel" />
+            <span class="text-danger" asp-validation-for="Car.ProductLabel"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.ModelName"></label>
+            <input class="form-control" asp-for="Car.ModelName" />
+            <span class="text-danger" asp-validation-for="Car.ModelName"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.Seats"></label>
+            <input class="form-control" asp-for="Car.Seats" />
+            <span class="text-danger" asp-validation-for="Car.Seats"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.Wheels"></label>
+            <input class="form-control" asp-for="Car.Wheels" />
+            <span class="text-danger" asp-validation-for="Car.Wheels"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.EngineLabel"></label>
+            <input class="form-control" asp-for="Car.EngineLabel" />
+            <span class="text-danger" asp-validation-for="Car.EngineLabel"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.MaxEngPower"></label>
+            <input class="form-control" asp-for="Car.MaxEngPower" />
+            <span class="text-danger" asp-validation-for="Car.MaxEngPower"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.MaxTorqPower"></label>
+            <input class="form-control" asp-for="Car.MaxTorqPower" />
+            <span class="text-danger" asp-validation-for="Car.MaxTorqPower"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.FuelType"></label>
+            <input class="form-control" asp-for="Car.FuelType" />
+            <span class="text-danger" asp-validation-for="Car.FuelType"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.OverallLenght"></label>
+            <input class="form-control" asp-for="Car.OverallLenght" />
+            <span class="text-danger" asp-validation-for="Car.OverallLenght"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.OverallWidth"></label>
+            <input class="form-control" asp-for="Car.OverallWidth" />
+            <span class="text-danger" asp-validation-for="Car.OverallWidth"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.OverallHeight"></label>
+            <input class="form-control" asp-for="Car.OverallHeight" />
+            <span class="text-danger" asp-validation-for="Car.OverallHeight"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.LightestCurbWeight"></label>
+            <input class="form-control" asp-for="Car.LightestCurbWeight" />
+            <span class="text-danger" asp-validation-for="Car.LightestCurbWeight"></span>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.HeaviestCurbWeight"></label>
+            <input class="form-control" asp-for="Car.HeaviestCurbWeight" />
+            <span class="text-danger" asp-validation-for="Car.HeaviestCurbWeight"></span>
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Car.Tires"></label>
+            <input class="form-control" asp-for="Car.Tires" />
+            <span class="text-danger" asp-validation-for="Car.Tires"></span>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <label asp-for="Photo" class="col-sm-1"></label>
+        <div class="form-group col-sm-4">
+            <div class="custom-file">
+                <input type="file" onchange="return ValidatePhoto(this);" asp-for="Photo" />
+                <p id="invalidImg" class="text-danger"></p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+    <script>
+        var _validFileExtensions = [".jpg", ".jpeg", ".gif", ".png"];
+        function ValidatePhoto(oInput) {
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            $('#invalidImg').html("");
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        $('#invalidImg').html("<p class='text-danger'>Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", ") + "</p>");
+                        oInput.value = "";
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
+
+</form>

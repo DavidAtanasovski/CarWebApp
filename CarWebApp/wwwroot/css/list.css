@@ -1,0 +1,18 @@
+﻿body {
+}
+
+
+
+
+.pic1{
+    width:10%;
+    height:auto;
+}
+
+.pic2 {
+    transition: transform .2s;
+}
+
+    .pic2:hover {
+        transform: scale(1.2);
+    }

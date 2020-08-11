@@ -1,0 +1,166 @@
+﻿@page
+@model CarWebApp.Pages.Page.CarModelsModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "CarModels";
+}
+
+<link href="~/css/slideshow.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/css/list.css" rel="stylesheet" type="text/css" />
+
+
+<body style="background-color:rgba(128, 128, 128, 0.56)">
+    <div class="col-sm-12" style="text-align:center;">
+        <p style="font-family:Bahnschrift; font-size:30px; margin-top:40px;">
+            Our Latest Models
+        </p>
+
+    </div>
+
+
+    <div class="containerr">
+        <input type="radio" name="images" id="i1" checked />
+        <input type="radio" name="images" id="i2" />
+        <input type="radio" name="images" id="i3" />
+
+        <div class="slideimg" id="one">
+            <img src="~/Images/hyundaiAccent.jpg" />
+            <label for="i3" class="pre"></label>
+            <label for="i2" class="nxt"></label>
+        </div>
+        <div class="slideimg" id="two">
+            <img src="~/Images/hyundai-elantra.jpg" />
+            <label for="i1" class="pre"></label>
+            <label for="i3" class="nxt"></label>
+        </div>
+        <div class="slideimg" id="three">
+            <img src="~/Images/hyundai-ioniq-hybrid.jpg" />
+            <label for="i2" class="pre"></label>
+            <label for="i1" class="nxt"></label>
+        </div>
+
+        <div class="navv">
+            <label class="dots" id="dot1" for="i1"></label>
+            <label class="dots" id="dot2" for="i2"></label>
+            <label class="dots" id="dot3" for="i3"></label>
+        </div>
+
+    </div>
+
+    <div class="form-row" style="margin-top:60px; text-align:center;  font-size:20px; ">
+        <div class="form-group col-sm-4">
+            <img style="width:100%; height:100%; border-radius:50%;" src="~/Images/hyundaiAccent.jpg" />
+            <p style="margin-top:20px; font-style:italic;">Hyundai Accent (2020)</p>
+            <a asp-page="/Page/HAccent" class="btn btn-warning">See More..</a>
+
+        </div>
+        <div class="form-group col-sm-4">
+            <img style="width:100%; height:100%; border-radius:50%;" src="~/Images/hyundai-elantra.jpg" />
+            <p style="margin-top:20px; font-style:italic;">Hyundai Elantra (2020) </p>
+            <a asp-page="/Page/HElantra" class="btn btn-warning">See More..</a>
+
+        </div>
+        <div class="form-group col-sm-4">
+            <img style="width:100%; height:100%; border-radius:50%;" src="~/Images/hyundai-ioniq-hybrid.jpg" />
+            <p style="margin-top:20px; font-style:italic;">Hyundai Ioniq Hybird (2020)</p>
+            <a asp-page="/Page/HIoniqHybird" class="btn btn-warning">See More..</a>
+
+        </div>
+
+    </div>
+
+    <div class="col-sm-12" style="margin-top:180px;">
+        <p style="font-family:Bahnschrift; font-size:40px;">
+            Some Our Models
+        </p>
+
+    </div>
+
+    <div class="form-row" style="margin-top:40px; text-align:center;">
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/1.png" />
+            <p style="margin-top:20px; font-style:italic;">Azera</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/2.png" />
+            <p style="margin-top:20px; font-style:italic;">Sonata</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/3.png" />
+            <p style="margin-top:20px; font-style:italic;">i40</p>
+        </div>
+        <div class="form-group col-sm-3">
+
+            <img style="width:100%; height:100%;" src="~/Images/4.png" />
+            <p style="margin-top:20px; font-style:italic;">i40 Sedan</p>
+        </div>
+
+    </div>
+    <div class="form-row" style="margin-top:20px; text-align:center;">
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/5.png" />
+            <p style="margin-top:20px; font-style:italic;">Veloster N</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/6.png" />
+            <p style="margin-top:20px; font-style:italic;">Veloster</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/7.png" />
+            <p style="margin-top:20px; font-style:italic;">i30 Fastback N</p>
+        </div>
+        <div class="form-group col-sm-3">
+            <img style="width:100%; height:100%;" src="~/Images/8.png" />
+            <p style="margin-top:20px; font-style:italic;">i30 N</p>
+        </div>
+
+    </div>
+
+    <table style="margin-top:100px;">
+
+        <thead style="margin-top:30px;">
+            <tr>
+                <th>
+                    <h4>Cars</h4>
+                </th>
+               
+            </tr>
+        </thead>
+       
+        @foreach (var car in Model.Cars)
+        {
+            var photoPath = "~/Images/" + car.Photo;
+
+             <tr style="font-size:20px; font-family:Arial; font-style:italic; font-weight:bold;">
+
+                 <td>
+                @car.ModelName
+                 </td>
+           
+            
+                 <td>
+                     <img class="pic2" style="margin-left:50px;" src="@photoPath" asp-append-version="true" />
+                 </td>
+                 <td>
+                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                     {
+                     <a style="margin-left:40px;" class="btn btn-outline-secondary" asp-page="./Delete" asp-route-carId="@car.Id">
+                         <i class="fas fa-trash"></i>
+                     </a>
+                     }
+                     <a style="margin-left:40px;" class="btn btn-outline-secondary" asp-page="./Detail" asp-route-carId="@car.Id">
+                         <i class="fas fa-search-plus"></i>
+                     </a>
+                 </td>
+             </tr>
+           
+        }
+    </table>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-page="./Create">Create a car</a>
+    }
+</body>
+
